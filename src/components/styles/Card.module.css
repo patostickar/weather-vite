@@ -1,0 +1,109 @@
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(750px / 3);
+  height: calc(1334px / 3);
+  margin: 1em 1em;
+  background-size: cover;
+  background-position: center center;
+  box-shadow: -4px 4px 10px 3px rgb(0 0 0 / 15%);
+  border-radius: 10px;
+  text-align: center;
+  transition: all 2s ease-in-out;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    height: calc(1334px / 4);
+  }
+}
+
+.background_day {
+  background-image: url(../../assets/backgrounds/day.webp);
+}
+.background_evening {
+  background-image: url(../../assets/backgrounds/evening.webp);
+}
+.background_night {
+  background-image: url(../../assets/backgrounds/night.webp);
+}
+
+.flex_evenly {
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.top_left_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top_left_box h4 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.top_left_box p {
+  margin: 0px 4px 0px 0px;
+  font-size: 0.7em;
+}
+.top_left_box h5 {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.top_right_box h5 {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.temp {
+  margin: auto;
+}
+
+.bottom_box {
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+div.line:before {
+  content: "";
+  position: absolute;
+  left: 5%;
+  top: 0;
+  height: 15px;
+  width: 90%;
+  border-top: 1px solid rgb(255 255 255 / 50%);
+}
+
+img {
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn {
+  display: block;
+  margin-left: auto;
+  border: none;
+  padding: 1em 1.2em;
+  font-size: 0.6em;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  outline: none;
+  color: var(--primary-font-color);
+  transition: all 1s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: scale(1.5);
+}
