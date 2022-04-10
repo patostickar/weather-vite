@@ -1,4 +1,9 @@
-import { DEL_CITY, GET_CITY, SET_CITY } from "../actions/actionTypes";
+import {
+  DEL_CITY,
+  GET_CITY,
+  ORDER_CITY,
+  SET_CITY,
+} from "../actions/actionTypes";
 
 const initialState = {
   cities: [],

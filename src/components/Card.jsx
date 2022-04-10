@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "./styles/Card.module.css";
+import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { delCity } from "../redux/actions";
 //#region icon imports
@@ -17,6 +18,18 @@ import cloudy_night from "../assets/icons/animated/cloudy_night.svg";
 import weather from "../assets/icons/animated/weather.svg";
 //#endregion
 
+const variants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 export default function Card({
   // properties
   city: {
@@ -28,9 +41,9 @@ export default function Card({
     id,
     name,
   },
+  index,
 }) {
   const dispatch = useDispatch();
-
   // background image conditions
   let bg_image;
   switch (true) {
@@ -99,43 +112,57 @@ export default function Card({
   description = capitalizeWords(description);
 
   return (
-    <div className={`${style.card} ${bg_image}`}>
-      <div>
-        <button onClick={() => dispatch(delCity(id))} className={style.btn}>
-          X
-        </button>
-        <div className={style.flex_evenly}>
-          <div className={style.top_left_box}>
-            <h4 className={style.temp}>{temp}°C</h4>
-            <Link to={`/ciudad/${id}`}>
-              <p>{country}</p>
-              <h5>{name}</h5>
-            </Link>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      variants={variants}
+      layoutId={id}
+      // transition={{ delay: (index + 1) * 0.2 }}
+    >
+      <div className={`${style.card} ${bg_image}`}>
+        <div>
+          <button onClick={() => dispatch(delCity(id))} className={style.btn}>
+            X
+          </button>
+          <div className={style.flex_evenly}>
+            <div className={style.top_left_box}>
+              <h4 className={style.temp}>{temp}°C</h4>
+              <Link to={`/ciudad/${id}`}>
+                <p>{country}</p>
+                <h5>{name}</h5>
+              </Link>
+            </div>
+            <div className={style.top_right_box}>
+              <img
+                src={weather_icon}
+                width="80"
+                height="80"
+                alt="weather icon"
+              />
+              <h5>{description}</h5>
+            </div>
           </div>
-          <div className={style.top_right_box}>
-            <img src={weather_icon} width="80" height="80" alt="weather icon" />
-            <h5>{description}</h5>
+        </div>
+        <div className={`${style.flex_evenly} ${style.line}`}>
+          <div className={style.bottom_box}>
+            <p>Min</p>
+            <p>{temp_min}°C</p>
+          </div>
+          <div className={style.bottom_box}>
+            <p>Max</p>
+            <p>{temp_max}°C</p>
+          </div>
+          <div className={style.bottom_box}>
+            <p>Humidity</p>
+            <p>{humidity} %</p>
+          </div>
+          <div className={style.bottom_box}>
+            <p>Pressure</p>
+            <p>{pressure} hPa</p>
           </div>
         </div>
       </div>
-      <div className={`${style.flex_evenly} ${style.line}`}>
-        <div className={style.bottom_box}>
-          <p>Min</p>
-          <p>{temp_min}°C</p>
-        </div>
-        <div className={style.bottom_box}>
-          <p>Max</p>
-          <p>{temp_max}°C</p>
-        </div>
-        <div className={style.bottom_box}>
-          <p>Humidity</p>
-          <p>{humidity} %</p>
-        </div>
-        <div className={style.bottom_box}>
-          <p>Pressure</p>
-          <p>{pressure} hPa</p>
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 }
