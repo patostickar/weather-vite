@@ -1,4 +1,3 @@
-import "normalize.css";
 import "./App.css";
 
 import { Route } from "react-router-dom";
@@ -13,7 +12,6 @@ function App() {
   return (
     <div className="app">
       <Nav />
-      <Route path="/" exact component={SearchBar} />
       <Route path="/" exact component={Cards} />
       <Route path="/ciudad/:ciudadId" exact component={Ciudad} />
       <Route path="/about" exact component={About} />

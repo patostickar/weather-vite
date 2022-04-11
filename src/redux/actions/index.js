@@ -1,4 +1,9 @@
-import { GET_CITY, SET_CITY, DEL_CITY } from "../actions/actionTypes";
+import {
+  GET_CITY,
+  SET_CITY,
+  DEL_CITY,
+  CITY_NOT_FOUND,
+} from "../actions/actionTypes";
 
 // Las actions envían un objeto con una propiedad type, que es el tipo de acción que se está ejecutando,
 // y una propiedad payload, que es el contenido de la acción.
@@ -24,7 +29,7 @@ export function getCity(city) {
       .then(handleError)
       .then((res) => res.json())
       .then((res) => dispatch({ type: GET_CITY, payload: res }))
-      .catch((err) => console.log(err));
+      .catch(() => dispatch({ type: CITY_NOT_FOUND, payload: true }));
   };
 }
 

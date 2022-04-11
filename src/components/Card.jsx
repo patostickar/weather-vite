@@ -15,6 +15,7 @@ import clear_day from "../assets/icons/animated/day.svg";
 import clear_night from "../assets/icons/animated/night.svg";
 import cloudy_day from "../assets/icons/animated/cloudy_day.svg";
 import cloudy_night from "../assets/icons/animated/cloudy_night.svg";
+import cloudy from "../assets/icons/animated/cloudy.svg";
 import weather from "../assets/icons/animated/weather.svg";
 //#endregion
 
@@ -25,7 +26,7 @@ const variants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.2,
     },
   },
 };
@@ -41,9 +42,17 @@ export default function Card({
     id,
     name,
   },
-  index,
 }) {
   const dispatch = useDispatch();
+
+  // Current time
+  const time = new Date(Date.now() + timezone * 1000).toLocaleString("en-US", {
+    timeZone: "Etc/UTC",
+    // hour12: false,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   // background image conditions
   let bg_image;
   switch (true) {
@@ -65,6 +74,10 @@ export default function Card({
       break;
     case "Drizzle":
       weather_icon = drizzle;
+      break;
+    case "Mist":
+      weather_icon = cloudy;
+      break;
     case "Rain":
       if (dt > sunrise && dt < sunset) {
         weather_icon = rainy_day;
@@ -118,7 +131,6 @@ export default function Card({
       exit="hidden"
       variants={variants}
       layoutId={id}
-      // transition={{ delay: (index + 1) * 0.2 }}
     >
       <div className={`${style.card} ${bg_image}`}>
         <div>
@@ -144,22 +156,25 @@ export default function Card({
             </div>
           </div>
         </div>
-        <div className={`${style.flex_evenly} ${style.line}`}>
-          <div className={style.bottom_box}>
-            <p>Min</p>
-            <p>{temp_min}°C</p>
-          </div>
-          <div className={style.bottom_box}>
-            <p>Max</p>
-            <p>{temp_max}°C</p>
-          </div>
-          <div className={style.bottom_box}>
-            <p>Humidity</p>
-            <p>{humidity} %</p>
-          </div>
-          <div className={style.bottom_box}>
-            <p>Pressure</p>
-            <p>{pressure} hPa</p>
+        <div>
+          <div className={style.time}>{time}</div>
+          <div className={`${style.flex_evenly} ${style.line}`}>
+            <div className={style.bottom_box}>
+              <p>Min</p>
+              <p>{temp_min}°C</p>
+            </div>
+            <div className={style.bottom_box}>
+              <p>Max</p>
+              <p>{temp_max}°C</p>
+            </div>
+            <div className={style.bottom_box}>
+              <p>Humidity</p>
+              <p>{humidity} %</p>
+            </div>
+            <div className={style.bottom_box}>
+              <p>Pressure</p>
+              <p>{pressure} hPa</p>
+            </div>
           </div>
         </div>
       </div>

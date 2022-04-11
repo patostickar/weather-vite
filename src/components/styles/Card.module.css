@@ -89,6 +89,11 @@ a {
   color: inherit;
 }
 
+p {
+  margin-top: revert;
+  margin-bottom: revert;
+}
+
 .btn {
   display: block;
   margin-left: auto;
@@ -106,4 +111,8 @@ a {
 
 .btn:hover {
   transform: scale(1.5);
+}
+
+.time {
+  margin-bottom: 0.5em;
 }
