@@ -72,6 +72,7 @@ module.exports = {
     if (findSeries) throw new Error(`La serie ${name} ya existe`);
 
     series.push({ name, seasons, category, year, rating: 0, reviews: [] });
+    return `La serie ${name} fue agregada correctamente`;
 
     // Agrega una nueva serie al catálogo.
     // Si la serie ya existe, no la agrega y arroja un Error ('La serie <nombre_de_la_serie> ya existe')
