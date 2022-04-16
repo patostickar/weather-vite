@@ -150,8 +150,12 @@ module.exports = {
     if (!user[0].watched.includes(serie))
       throw new Error("Debes reproducir el contenido para poder puntuarlo");
 
-    chosenSerie[0].reviews.push(score);
-    chosenSerie[0].rating = score;
+    chosenSerie[0].reviews.push({ email, score });
+    const rating = chosenSerie[0].reviews.reduce(
+      (acc, review) => acc + review.score,
+      0
+    );
+    chosenSerie[0].rating = rating / chosenSerie[0].reviews.length;
     return `Le has dado ${score} puntos a la serie ${serie}`;
     // Asigna un puntaje de un usuario para una serie:
     // Actualiza la propiedad <reviews> de la serie, guardando en dicho arreglo un objeto con el formato { email : email, score : score } (ver examples.json)
