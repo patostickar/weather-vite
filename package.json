@@ -21,9 +21,12 @@
     "supertest-as-promised": "^4.0.2"
   },
   "devDependencies": {
+    "eslint": "^8.13.0",
     "standard": "^16.0.4"
   },
   "standard": {
-    "env": [ "mocha" ]
+    "env": [
+      "mocha"
+    ]
   }
 }
